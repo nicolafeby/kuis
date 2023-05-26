@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuis/core/router/router_constant.dart';
 import 'package:kuis/presentation/home/page/home_page.dart';
+import 'package:kuis/presentation/topic/page/topic_page.dart';
 
 class Router {
   Route generateRouter(Widget page, RouteSettings settings) {
@@ -14,6 +15,8 @@ class Router {
     switch (settings.name) {
       case RouterConstant.homePage:
         return const HomePage();
+      case RouterConstant.topicPage:
+        return const TopicPage();
       default:
         return const HomePage();
     }

@@ -16,6 +16,7 @@ dependencies:
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  font_awesome_flutter: ^10.4.0
   get_it: ^7.2.0
   google_fonts: ^4.0.5
   ua_client_hints: ^1.1.3

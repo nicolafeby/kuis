@@ -18,7 +18,11 @@ class MyApp extends StatelessWidget {
     return baseTheme.copyWith(
       textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme),
       scaffoldBackgroundColor: const Color(0xFF1A284c),
-      appBarTheme: const AppBarTheme(color: Color(0xFF1A284c)),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(
+          0xFF1A284c,
+        ),
+      ),
     );
   }
 

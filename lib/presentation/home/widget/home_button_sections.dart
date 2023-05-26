@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuis/core/router/router_constant.dart';
 import 'package:kuis/core/widget/custom_button.dart';
 import 'package:kuis/core/widget/custom_outlined_button.dart';
 
@@ -19,7 +20,7 @@ class HomeButtonSections extends StatelessWidget {
           CustomOutlinedButton(
             width: MediaQuery.of(context).size.width / 1.4,
             title: 'TOPICS',
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, RouterConstant.topicPage),
           )
         ],
       ),
