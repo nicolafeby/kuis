@@ -8,7 +8,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.flexibleSpace,
     this.leading,
     this.leadingWidth,
-    this.centerTitle = false,
+    this.centerTitle = true,
     super.key,
   });
 
