@@ -4,4 +4,5 @@ class AppConstant {
 
 class AssetConstant {
   static const String imgLamp = 'assets/images/imgLamp.png';
+  static const String lotQuiz = 'assets/lotties/lotQuiz.json';
 }
