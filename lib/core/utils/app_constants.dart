@@ -3,5 +3,5 @@ class AppConstant {
 }
 
 class AssetConstant {
-  
+  static const String imgLamp = 'assets/images/imgLamp.png';
 }
