@@ -1,10 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:kuis/core/router/router.dart' as router;
+import 'package:get/get.dart';
+import 'package:kuis/core/router/router.dart';
 
 import 'injector/injector.dart' as di;
 
-void main() async {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await di.init();
   runApp(const MyApp());
 }
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
     var baseTheme = ThemeData(brightness: brightness);
 
     return baseTheme.copyWith(
-      textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme),
+      // textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme),
       scaffoldBackgroundColor: const Color(0xFF1A284c),
       appBarTheme: const AppBarTheme(
         backgroundColor: Color(
@@ -28,10 +31,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       theme: _buildTheme(Brightness.dark),
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: router.Router().generateAppRoutes,
+      getPages: AppRoutes.pages(),
     );
   }
 }

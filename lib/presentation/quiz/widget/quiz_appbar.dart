@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuis/core/router/router_constant.dart';
 import 'package:kuis/core/widget/custom_appbar.dart';
 
 class QuizAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,7 +12,11 @@ class QuizAppbar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.only(top: 8.0, right: 8.0),
           child: TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pushNamedAndRemoveUntil(
+              context,
+              RouterConstant.homePage,
+              (route) => false,
+            ),
             child: Text(
               'Exit',
               style: Theme.of(context).textTheme.titleSmall,

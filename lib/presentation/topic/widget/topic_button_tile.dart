@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kuis/core/controllers/kuis_controller.dart';
+import 'package:kuis/core/models/kuis_model.dart';
 import 'package:kuis/core/router/router_constant.dart';
 
-class TopicButtonTile extends StatelessWidget {
+class TopicButtonTile extends GetView<QuizPaperController> {
   final String title;
-  const TopicButtonTile({super.key, required this.title});
+  final QuizPaperModel model;
+  const TopicButtonTile({super.key, required this.title, required this.model});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>
-          Navigator.pushReplacementNamed(context, RouterConstant.quizPage),
+      // onTap: () => Navigator.pushNamed(context, RouterConstant.quizPage),
+      onTap: () => Get.toNamed(RouterConstant.quizPage, arguments: model),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),

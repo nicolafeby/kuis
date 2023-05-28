@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kuis/core/controllers/kuis_controller.dart';
+import 'package:kuis/core/firebase/loading_status.dart';
 import 'package:kuis/core/widget/custom_appbar.dart';
 import 'package:kuis/presentation/topic/widget/topic_button_tile.dart';
 
-class TopicPage extends StatelessWidget {
+class TopicPage extends GetView {
   const TopicPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    QuizPaperController quizController = Get.find();
     return Scaffold(
       appBar: _buildAppbar(context),
-      body: _buildBody(),
+      body: _buildBody(quizController),
     );
   }
 
@@ -26,16 +30,23 @@ class TopicPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBody() {
-    return ListView.separated(
-      padding: const EdgeInsets.all(16.0),
-      itemCount: 20,
-      separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(height: 12.0);
-      },
-      itemBuilder: (BuildContext context, int index) {
-        return const TopicButtonTile(title: 'Politic');
-      },
+  Widget _buildBody(QuizPaperController quizController) {
+    return Obx(
+      () => quizController.loadingStatus.value == LoadingStatus.loading
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.separated(
+              padding: const EdgeInsets.all(16.0),
+              itemCount: quizController.allPapers.length,
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(height: 12.0);
+              },
+              itemBuilder: (BuildContext context, int index) {
+                return TopicButtonTile(
+                  title: quizController.allPapers[index].title,
+                  model: quizController.allPapers[index],
+                );
+              },
+            ),
     );
   }
 }
