@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-class QuizPaperModel {
+class QuizModel {
   final String id;
   final String title;
   String? imageUrl;
@@ -13,7 +13,7 @@ class QuizPaperModel {
   List<Question>? questions;
   // final int questionsCount;
 
-  QuizPaperModel({
+  QuizModel({
     required this.id,
     required this.title,
     this.imageUrl,
@@ -25,10 +25,10 @@ class QuizPaperModel {
 
   String timeInMinits() => "${(timeSeconds / 60).ceil()} mins";
 
-  factory QuizPaperModel.fromString(String jsonString) =>
-      QuizPaperModel.fromJson(json.decode(jsonString));
+  factory QuizModel.fromString(String jsonString) =>
+      QuizModel.fromJson(json.decode(jsonString));
 
-  QuizPaperModel.fromJson(Map<String, dynamic> json)
+  QuizModel.fromJson(Map<String, dynamic> json)
       : description = json['Description'] as String,
         id = json['id'],
         imageUrl = json['image_url'] as String?,
@@ -44,7 +44,7 @@ class QuizPaperModel {
                     (dynamic e) => Question.fromJson(e as Map<String, dynamic>))
                 .toList();
 
-  QuizPaperModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
+  QuizModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
       : id = snapshot.id,
         title = snapshot['title'],
         imageUrl = snapshot['image_url'],

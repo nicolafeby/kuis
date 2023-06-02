@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kuis/core/controllers/kuis_controller.dart';
 import 'package:kuis/core/firebase/loading_status.dart';
 import 'package:kuis/core/widget/custom_appbar.dart';
+import 'package:kuis/presentation/topic/controllers/topic_controller.dart';
 import 'package:kuis/presentation/topic/widget/topic_button_tile.dart';
 
-class TopicPage extends GetView {
+class TopicPage extends GetView<TopicController> {
   const TopicPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    QuizPaperController quizController = Get.find();
+    TopicController topicController = Get.find();
     return Scaffold(
       appBar: _buildAppbar(context),
-      body: _buildBody(quizController),
+      body: _buildBody(topicController),
     );
   }
 
@@ -30,23 +30,30 @@ class TopicPage extends GetView {
     );
   }
 
-  Widget _buildBody(QuizPaperController quizController) {
+  Widget _buildBody(TopicController topicController) {
     return Obx(
-      () => quizController.loadingStatus.value == LoadingStatus.loading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.separated(
-              padding: const EdgeInsets.all(16.0),
-              itemCount: quizController.allPapers.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(height: 12.0);
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return TopicButtonTile(
-                  title: quizController.allPapers[index].title,
-                  model: quizController.allPapers[index],
-                );
-              },
-            ),
+      () {
+        if (topicController.loadingStatus.value == LoadingStatus.loading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return ListView.separated(
+          padding: const EdgeInsets.all(16.0),
+          itemCount: topicController.allTopic.length,
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(height: 12.0);
+          },
+          itemBuilder: (BuildContext context, int index) {
+            return InkWell(
+              onTap: () => topicController.navigatoQuestions(
+                paper: topicController.allTopic[index],
+              ),
+              child: TopicButtonTile(
+                title: topicController.allTopic[index].title,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

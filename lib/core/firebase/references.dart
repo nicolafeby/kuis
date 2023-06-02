@@ -5,7 +5,7 @@ final fi = FirebaseFirestore.instance;
 
 //FR - firestore reference
 
-final quizePaperFR = fi.collection('kuis');
+final quizePaperFR = fi.collection('kuis-ku');
 final leaderBoardFR = fi.collection('leaderboard');
 
 CollectionReference<Map<String, dynamic>> getleaderBoard(
